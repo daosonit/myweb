@@ -1,0 +1,68 @@
+<?php
+
+return [
+    'nav-back'          => 'Lùi',
+    'nav-new'           => 'Tạo thư mục',
+    'nav-upload'        => 'Upload',
+    'nav-thumbnails'    => 'Thumbnails',
+    'nav-list'          => 'Danh sách',
+
+    'menu-rename'       => 'Đổi tên',
+    'menu-delete'       => 'Xóa',
+    'menu-view'         => 'Xem',
+    'menu-download'     => 'Tải về',
+    'menu-resize'       => 'Resize',
+    'menu-crop'         => 'Crop',
+
+    'title-page'        => 'Quản lý file',
+    'title-panel'       => 'Danh mục file',
+    'title-upload'      => 'Upload File',
+    'title-view'        => 'Xem File',
+    'title-root'        => 'Files',
+    'title-shares'      => 'Chia sẻ Files',
+    'title-item'        => 'Item',
+    'title-size'        => 'Size',
+    'title-type'        => 'Type',
+    'title-modified'    => 'Modified',
+    'title-action'      => 'Action',
+
+    'type-folder'       => 'Folder',
+
+    'message-empty'     => 'Folder is empty.',
+    'message-choose'    => 'Choose File',
+    'message-delete'    => 'Are you sure you want to delete this item?',
+    'message-name'      => 'Folder name:',
+    'message-rename'    => 'Rename to:',
+    'message-extension_not_found' => 'Please install gd or imagick extension to crop, resize, and make thumbnails of images.',
+
+    'error-rename'      => 'File name already in use!',
+    'error-file-empty'  => 'You must choose a file!',
+    'error-file-exist'  => 'A file with this name already exists!',
+    'error-file-size'   => 'File size exceeds server limit! (maximum size: :max)',
+    'error-delete'      => 'Bạn không thể xóa thư mục này vì nó không phải là trống rỗng!',
+    'error-folder-name' => 'Tên thư mục không thể để trống!',
+    'error-folder-exist'=> 'Một thư mục với tên này đã tồn tại!',
+    'error-folder-alnum'=> 'Chỉ có tên thư mục chữ số được cho phép!',
+    'error-mime'        => 'Unexpected MimeType: ',
+    'error-instance'    => 'Các tập tin được tải lên phải là một thể hiện của uploadedfile',
+    'error-invalid'     => 'Yêu cầu tải lên không hợp lệ',
+    'error-other'       => 'An error has occured: ',
+    'error-too-large'   => 'Request entity too large!',
+
+    'btn-upload'        => 'Upload File',
+    'btn-uploading'     => 'Uploading...',
+    'btn-close'         => 'Close',
+    'btn-crop'          => 'Crop',
+    'btn-cancel'        => 'Cancel',
+    'btn-resize'        => 'Resize',
+
+    'resize-ratio'      => 'Ratio:',
+    'resize-scaled'     => 'Image scaled:',
+    'resize-true'       => 'Yes',
+    'resize-old-height' => 'Original Height:',
+    'resize-old-width'  => 'Original Width:',
+    'resize-new-height' => 'Height:',
+    'resize-new-width'  => 'Width:',
+
+    'locale-bootbox'    => 'en',
+];
