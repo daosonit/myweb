@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'admin'      => \App\Http\Middleware\RedirectIfNotAdmin::class,
         'employee'   => \App\Http\Middleware\RedirectIfNotEmployee::class,
         'customer'   => \App\Http\Middleware\RedirectIfNotCustomer::class,
+        'user'       => \App\Http\Middleware\RedirectIfNotUser::class,
     ];
 }

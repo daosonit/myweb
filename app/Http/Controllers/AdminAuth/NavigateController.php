@@ -68,7 +68,7 @@ class NavigateController extends Controller
             $navigate->name = $request->name;
             $navigate->type = $request->type;
             if ($navigate->save()) {
-                return redirect()->route('admin.menu.index')->with('status','Update thành công.');
+                return back()->with('status','Update thành công.');
             } else {
                 return back()->with('status','Update thất bại.');
             }
@@ -77,17 +77,22 @@ class NavigateController extends Controller
             abort(404);
         }
     }
-
     /**
      * Delete
-     */
-    public function delete()
+    */
+    public function destroy($id)
     {
+        try {
+            $navigate = Navigate::findOrFail($id);
 
-    }
+            if( $navigate->delete()){
+                return back()->with('status', 'Delete success!');
+            }else{
+                return back()->with('status', 'Delete thất bại!');
+            }
 
-    public function destroy()
-    {
-
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
     }
 }

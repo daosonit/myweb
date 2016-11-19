@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapWebRoutes();
+        $this->mapUserRoutes();
 
         $this->mapAdminRoutes();
 
@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapCustomerRoutes()
     {
-        Route::group(['middleware' => ['web'], 'prefix' => 'tutorials', 'as' => 'customer.', 'namespace' => 'App\Http\Controllers\CustomerAuth',], function ($router) {
+        Route::group(['middleware' => ['web'], 'prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'App\Http\Controllers\CustomerAuth',], function ($router) {
             require base_path('routes/customer.php');
         });
     }
@@ -95,10 +95,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapUserRoutes()
     {
-        Route::group(['middleware' => 'web', 'namespace' => 'App\Http\Controllers'], function ($router) {
-            require base_path('routes/web.php');
+        Route::group(['middleware' => 'web', 'namespace' => 'App\Http\Controllers','prefix' => 'user', 'as' => 'user.'], function ($router) {
+            require base_path('routes/user.php');
         });
     }
 
