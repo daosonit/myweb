@@ -3,21 +3,25 @@
 namespace App\Http\Controllers\AdminAuth;
 
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminAuth\NavigateItemRequest;
 use App\Models\NavigateItem;
+use App\Http\Requests\AdminAuth\NavItemUpRequest;
 
 class NavigateItemController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $listing = NavigateItem::orderBy('nav_id', 'ASC')->orderBy('order', 'ASC')->paginate(10);
         $no = $listing->firstItem();
 
         return view('admin.menu-item.listing')->with(array('listing' => $listing, 'no' => $no));
     }
+
     //Add
     public function create()
     {
@@ -41,14 +45,32 @@ class NavigateItemController extends Controller
     }
 
     //Edit
-    public function edit()
+    public function edit($id)
     {
-        return view('admin.menu-item.update');
+        try {
+            $nav_item = NavigateItem::findOrFail($id);
+            return view('admin.menu-item.update')->with(array('nav_item' => $nav_item));
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
+
     }
 
-    public function update()
+    public function update(NavItemUpRequest $request, $id)
     {
+        try {
+            $nav_item = NavigateItem::findOrFail($id);
 
+            $data = $request->all();
+            $result = $nav_item->update($data);
+            if ($result) {
+                return back()->with('status', 'Cập nhật thành công.');
+            } else {
+                return back()->with('status', 'Cập nhật thất bại.');
+            }
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
     }
 
     //Delete
@@ -57,8 +79,18 @@ class NavigateItemController extends Controller
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-
+        try {
+            $nav_item = NavigateItem::findOrFail($id);
+;
+            if ($nav_item->delete()) {
+                return back()->with('status', 'Xóa thành công.');
+            } else {
+                return back()->with('status', 'Xóa thất bại.');
+            }
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
     }
 }

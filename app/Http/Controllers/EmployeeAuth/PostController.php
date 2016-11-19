@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\AdminAuth;
+namespace App\Http\Controllers\EmployeeAuth;
 
-use App\Models\Category;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminAuth\CategoryRequest;
-use App\Libraries\Image\UploadImage;
-use Config;
+use App\Http\Requests\CustomerAuth\PostRequest;
+use App\Models\Post;
 
-class CategoryController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
-        return view('admin.category.listing');
+        return view('customer.posts.listing');
     }
 
     /**
@@ -30,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.insert');
+        return view('customer.posts.insert');
     }
 
     /**
@@ -39,41 +35,26 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(PostRequest $request)
     {
         try {
-
+            $objPost = new Post();
             $data = $request->all();
-            if ($request->hasFile('image')) {
-                $upload_image = new UploadImage();
-                $upload_image->make($this->option())->save($request->file('image'));
 
-                if (count($upload_image->error()) == 0) {
-                    $data['image'] = $upload_image->fileName();
-                }
-            } else {
-                $data['image'] = '';
-            }
-
-            $result = Category::create($data);
-
+            $result = $objPost->insert(['name'        => $data['name'],
+                                        'title'       => $data['title'],
+                                        'keyword'     => $data['keyword'],
+                                        'description' => $data['description'],
+                                        'excerpt'     => $data['excerpt'],
+                                        'content'     => $data['content']]);
             if ($result) {
                 return back()->with('status', 'Thêm mới thành công');
             }
-
         } catch (ModelNotFoundException $e) {
 
         }
-    }
 
-    /**
-     * Kích thước hình ảnh
-     */
-    private function option()
-    {
-        return array('prefix_size' => Config::get('upload_image.sizeCategory'),
-                     'first_name'  => Config::get('upload_image.nameCategory'),
-                     'path'        => Config::get('upload_image.pathCategory'));
+
     }
 
     /**

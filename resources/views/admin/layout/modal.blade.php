@@ -1,10 +1,6 @@
 <div id="{{$href}}" class="modal text-left fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h1 class="modal-title">Thông báo</h1>
-            </div>
             <div class="modal-body">
                 <p> Bạn chắc chắn xóa muốn xóa dữ liệu này? </p>
             </div>

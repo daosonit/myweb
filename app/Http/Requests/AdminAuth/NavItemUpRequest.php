@@ -4,7 +4,7 @@ namespace App\Http\Requests\AdminAuth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NavigateRequest extends FormRequest
+class NavItemUpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class NavigateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255'
+            'name'  => 'required|max:255',
+            'route' => 'required|max:255'
         ];
     }
-
 
     /**
      * Get the validation messages that apply to the request.
@@ -37,7 +37,8 @@ class NavigateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập!'
+            'name.required'  => 'Vui lòng nhập!',
+            'route.required' => 'Vui lòng nhập!'
         ];
     }
 }

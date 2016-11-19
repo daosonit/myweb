@@ -11,11 +11,12 @@ class Navigate
      */
     public function getNavigate()
     {
-        return array(Nav::NAV_ADMIN     => 'Nav Admin',
-                     Nav::NAV_EMPLOYEE  => 'Nav Employee',
-                     Nav::NAV_CUSTOMER  => 'Nav Customer',
+        return array(-1 => 'Chọn hệ thống',
+                     Nav::NAV_ADMIN     => 'Nav Admin',
+                     Nav::NAV_EMPLOYEE => 'Nav Employee',
+                     Nav::NAV_CUSTOMER => 'Nav Customer',
                      Nav:: NAV_TUTORIAL => 'Tutorial',
-                     Nav::NAV_ARTICLE   => 'Article');
+                     Nav::NAV_ARTICLE => 'Article');
     }
 
     /**

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Employee
  */
@@ -19,6 +18,12 @@ Route::post('/password/reset', 'ResetPasswordController@reset')->name('post_rese
 Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('get_reset');
 Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('get_reset_token');
 
-Route::group(array('middleware' => 'employee'), function () {
+Route::group(array('middleware' => 'customer'), function () {
+    Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
+    Route::resource('/post', 'PostController');
+
+    Route::group(array('namespace' => 'Filemanager','prefix'=>'file','as'=>'file.'), function () {
+        //require __DIR__ . '/file_customer.php';
+    });
 
 });

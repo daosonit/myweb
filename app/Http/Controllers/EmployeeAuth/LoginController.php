@@ -5,28 +5,21 @@ namespace App\Http\Controllers\EmployeeAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
+    const ACTIVE = 1;
+    const DELETE = 0;
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
-    public $redirectTo = '/employee/home';
+    public $redirectTo = '/user/dashboard';
 
     /**
      * Create a new controller instance.
@@ -45,7 +38,69 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('employee.auth.login');
+        return view('user.login');
+    }
+
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        $credentials = $this->credentials($request);
+        $credentials['status'] = self::ACTIVE;
+
+        if ($this->guard()->attempt($credentials, $request->has('remember'))) {
+            return $this->sendLoginResponse($request);
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required|email',
+            'password'        => 'required',
+        ]);
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'email';
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+
+        return redirect('/user/login');
     }
 
     /**
@@ -57,4 +112,5 @@ class LoginController extends Controller
     {
         return Auth::guard('employee');
     }
+
 }

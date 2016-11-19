@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    public $redirectTo = '/employee/home';
+    public $redirectTo = '/customer/home';
 
 
     /**
@@ -52,7 +52,7 @@ class ResetPasswordController extends Controller
      */
     public function showResetForm(Request $request, $token = null)
     {
-        return view('employee.auth.passwords.reset')->with(
+        return view('customer.auth.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }
@@ -64,7 +64,7 @@ class ResetPasswordController extends Controller
      */
     public function broker()
     {
-        return Password::broker('employees');
+        return Password::broker('customers');
     }
 
     /**
@@ -74,6 +74,6 @@ class ResetPasswordController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('employee');
+        return Auth::guard('customer');
     }
 }

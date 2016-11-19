@@ -38,7 +38,7 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        return view('employee.auth.passwords.email');
+        return view('customer.auth.passwords.email');
     }
 
     /**
@@ -48,6 +48,6 @@ class ForgotPasswordController extends Controller
      */
     public function broker()
     {
-        return Password::broker('employees');
+        return Password::broker('customers');
     }
 }

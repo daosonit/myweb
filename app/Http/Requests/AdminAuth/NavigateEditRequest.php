@@ -24,7 +24,7 @@ class NavigateEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required|max:255'
         ];
     }
 

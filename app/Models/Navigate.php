@@ -21,4 +21,12 @@ class Navigate extends Model
     {
         return $this->hasMany('App\Models\NavigateItem', 'nav_id', 'id');
     }
+
+    public function scopeFindName($query,$name = ''){
+        return $query->where('name','LIKE','%'.$name.'%');
+    }
+
+    public function scopeFindType($query, $type = -1){
+        return $query->where('type','LIKE',$type);
+    }
 }

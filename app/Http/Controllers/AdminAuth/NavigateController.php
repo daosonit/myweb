@@ -16,11 +16,24 @@ class NavigateController extends Controller
     /**
      * Listing
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listing = Navigate::orderBy('order', 'ASC')->paginate(10);
+        $name = $request->get('name', '');
+        $type = $request->get('type', -1);
+
+        $query = Navigate::select('*');
+
+        if ($name != '') {
+            $query->findName($name);
+        }
+
+        if ($type > -1) {
+            $query->findType($type);
+        }
+
+        $listing = $query->orderBy('order', 'ASC')->paginate(10);
         $no = $listing->firstItem();
-        return view('admin.menu.listing')->with(array('listing' => $listing, 'no' => $no));
+        return view('admin.menu.listing')->with(array('listing' => $listing, 'name' => $name, 'type' => $type, 'no' => $no));
     }
 
     /**
@@ -68,26 +81,27 @@ class NavigateController extends Controller
             $navigate->name = $request->name;
             $navigate->type = $request->type;
             if ($navigate->save()) {
-                return back()->with('status','Update thành công.');
+                return back()->with('status', 'Update thành công.');
             } else {
-                return back()->with('status','Update thất bại.');
+                return back()->with('status', 'Update thất bại.');
             }
 
         } catch (ModelNotFoundException $e) {
             abort(404);
         }
     }
+
     /**
      * Delete
-    */
+     */
     public function destroy($id)
     {
         try {
             $navigate = Navigate::findOrFail($id);
 
-            if( $navigate->delete()){
+            if ($navigate->delete()) {
                 return back()->with('status', 'Delete success!');
-            }else{
+            } else {
                 return back()->with('status', 'Delete thất bại!');
             }
 

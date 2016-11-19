@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapCustomerRoutes()
     {
-        Route::group(['middleware' => ['web'], 'prefix' => 'customer', 'as' => 'customer.', 'namespace' => 'App\Http\Controllers\CustomerAuth',], function ($router) {
+        Route::group(['middleware' => ['web'], 'as' => 'customer.', 'namespace' => 'App\Http\Controllers\CustomerAuth',], function ($router) {
             require base_path('routes/customer.php');
         });
     }
@@ -69,7 +69,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapEmployeeRoutes()
     {
-        Route::group(['middleware' => ['web'], 'prefix' => 'employee', 'as' => 'employee.', 'namespace' => 'App\Http\Controllers\EmployeeAuth'], function ($router) {
+        Route::group(['middleware' => ['web'], 'prefix' => 'user', 'as' => 'user.', 'namespace' => 'App\Http\Controllers\EmployeeAuth'], function ($router) {
             require base_path('routes/employee.php');
         });
     }

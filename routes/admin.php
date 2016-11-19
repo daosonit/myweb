@@ -27,4 +27,5 @@ Route::group(array('middleware' => 'admin'), function () {
     Route::resource('/menu-item', 'NavigateItemController');
     Route::resource('/category', 'CategoryController');
     Route::resource('/customer', 'CustomerController');
+    Route::resource('/user', 'UserController');
 });
