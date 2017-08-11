@@ -25,3 +25,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+- [express](https://github.com/nuxt-community/express-template): Nuxt.js + Express
+- [koa](https://github.com/nuxt-community/koa-template): Nuxt.js + Koa
+- [adonuxt](https://github.com/nuxt-community/adonuxt-template): Nuxt.js + AdonisJS
+- [micro](https://github.com/nuxt-community/micro-template): Nuxt.js + Micro
